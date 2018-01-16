@@ -39,8 +39,8 @@ def custom_score(game, player):
     if game.is_loser(player):
         return float("-inf")
     own_moves = len(game.get_legal_moves(player))
-    opp_moves = len(game.get_legal_moves(game.get_opponent(player
-    if own_moves !=opp_moves:
+    opp_moves = len(game.get_legal_moves(game.get_opponent(player)))
+    if own_moves != opp_moves :
         return float(own_moves - opp_moves)
     else:
         mid_y, mid_x = int(game.height / 2), int(game.width / 2)
@@ -110,13 +110,10 @@ def custom_score_3(game, player):
         return float("inf")
     if game.is_loser(player):
         return float("-inf")
-
-    mid_y, mid_x = int(game.height / 2), int(game.width / 2)
     own_y, own_x = game.get_player_location(player)
     opp_y, opp_x = game.get_player_location(game.get_opponent(player))
-    own_dist = math.sqrt(((own_y - mid_y)**2) + ((own_x - mid_x)**2))
-    opp_dist = math.sqrt(((own_y - mid_y)**2) + ((own_x - mid_x)**2))
-    return float(opp_dist-own_dist)
+    dist = math.sqrt(((own_y - opp_y)**2) + ((own_x - opp_x)**2))
+    return float(-1*dist)
 
 class IsolationPlayer:
     """Base class for minimax and alphabeta agents -- this class is never
